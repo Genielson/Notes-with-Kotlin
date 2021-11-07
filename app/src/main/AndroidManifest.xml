@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectNotes">
         <activity
+            android:name=".UpdateNoteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddEditNoteActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
