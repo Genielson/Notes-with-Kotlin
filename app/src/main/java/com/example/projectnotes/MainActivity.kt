@@ -55,13 +55,15 @@ class MainActivity : AppCompatActivity(), NotesRecyclerAdapter.NoteClickDeleteIn
         var intent = Intent(this,UpdateNoteActivity::class.java)
         intent.putExtra("noteTitle", note.noteTitle)
         intent.putExtra("noteDescription", note.noteDescription)
-        intent.putExtra("noteId", note.id)
+        intent.putExtra("noteId", note.id.toString())
         startActivity(intent)
         this.finish()
+
     }
 
     override fun onDeleteIconClick(note: Note) {
         viewModel.deleteNote(note)
-        Toast.makeText(this,"Nota deletada com sucesso! ",Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"Nota deletada com sucesso! ",
+            Toast.LENGTH_LONG).show()
     }
 }
