@@ -13,7 +13,7 @@
             android:name=".UpdateNoteActivity"
             android:exported="false" />
         <activity
-            android:name=".AddEditNoteActivity"
+            android:name=".AddNoteActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

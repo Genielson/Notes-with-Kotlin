@@ -8,27 +8,30 @@ import androidx.room.RoomDatabase
 @Database(entities = arrayOf(Note::class),version = 1, exportSchema = false)
 abstract class NoteDatabase : RoomDatabase() {
 
-    abstract fun getNotesDao():NoteDao
+    // essa funcao vai ser chamada na viewmodel
+    abstract fun getNotesDao(): NoteDao
 
-    // Padrao Singleton
     companion object {
-
+        // Singleton prevents multiple instances of database opening at the
+        // same time.
         @Volatile
-        private var INSTANCE : NoteDatabase? = null
+        private var INSTANCE: NoteDatabase? = null
 
-        fun getDatabase(context: Context):NoteDatabase{
-
-            if(INSTANCE == null){
-
-                INSTANCE = Room.databaseBuilder(context.applicationContext,
-                NoteDatabase::class.java,
+        // essa funcao é chamada na viewmodel passando aplication
+        fun getDatabase(context: Context): NoteDatabase {
+            // if the INSTANCE is not null, then return it,
+            // if it is, then create the database
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    NoteDatabase::class.java,
                     "note_database"
-                    ).build()
+                ).build()
 
+                INSTANCE = instance
+                // return instance
+                instance
             }
-
-            return INSTANCE as NoteDatabase
-
         }
 
     }

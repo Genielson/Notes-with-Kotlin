@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity(),NotesRecyclerAdapter.NoteClickInterface,NotesRecyclerAdapter.NoteClickDeleteInterface  {
+class MainActivity : AppCompatActivity(), NotesRecyclerAdapter.NoteClickDeleteInterface,NotesRecyclerAdapter.NoteClickInterface  {
 
-    var notesRecycleView : RecyclerView? = null
+    lateinit var notesRecycleView : RecyclerView
     private lateinit var floatButtonClick:FloatingActionButton
-    var viewModel : NoteViewModel?= null
+    lateinit var viewModel : NoteViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,19 +21,22 @@ class MainActivity : AppCompatActivity(),NotesRecyclerAdapter.NoteClickInterface
 
         notesRecycleView = findViewById(R.id.recyclerView)
         floatButtonClick = findViewById(R.id.floatButtonAdd)
-        notesRecycleView!!.layoutManager = LinearLayoutManager(this)
+        notesRecycleView.layoutManager = LinearLayoutManager(this)
 
-        var adapter = NotesRecyclerAdapter(this,this,this)
-        notesRecycleView!!.adapter = adapter
+        var adapter = NotesRecyclerAdapter(this,
+            this,
+            this)
+
+        notesRecycleView.adapter = adapter
 
         viewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(NoteViewModel::class.java)
 
-        viewModel!!.allNotes?.observe(this,{ list ->
+        viewModel.allNotes.observe(this,{ list ->
 
-            list?.let{
+            list.let{
                 adapter.updateList(it as ArrayList<Note>)
             }
 
@@ -41,17 +44,15 @@ class MainActivity : AppCompatActivity(),NotesRecyclerAdapter.NoteClickInterface
 
         floatButtonClick.setOnClickListener{
 
-            var intent = Intent(this,AddEditNoteActivity::class.java)
+            var intent = Intent(this,AddNoteActivity::class.java)
             startActivity(intent)
             this.finish()
         }
-
     }
 
     override fun onNoteClick(note: Note) {
 
-        var intent = Intent(this,AddEditNoteActivity::class.java)
-        intent.putExtra("noteType", "Edit")
+        var intent = Intent(this,UpdateNoteActivity::class.java)
         intent.putExtra("noteTitle", note.noteTitle)
         intent.putExtra("noteDescription", note.noteDescription)
         intent.putExtra("noteId", note.id)
@@ -60,9 +61,7 @@ class MainActivity : AppCompatActivity(),NotesRecyclerAdapter.NoteClickInterface
     }
 
     override fun onDeleteIconClick(note: Note) {
-        viewModel?.deleteNote(note)
+        viewModel.deleteNote(note)
         Toast.makeText(this,"Nota deletada com sucesso! ",Toast.LENGTH_LONG).show()
     }
-
-
 }
