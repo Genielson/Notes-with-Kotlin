@@ -43,10 +43,8 @@ class MainActivity : AppCompatActivity(), NotesRecyclerAdapter.NoteClickDeleteIn
         })
 
         floatButtonClick.setOnClickListener{
-
             var intent = Intent(this,AddNoteActivity::class.java)
             startActivity(intent)
-            this.finish()
         }
     }
 
@@ -57,7 +55,6 @@ class MainActivity : AppCompatActivity(), NotesRecyclerAdapter.NoteClickDeleteIn
         intent.putExtra("noteDescription", note.noteDescription)
         intent.putExtra("noteId", note.id.toString())
         startActivity(intent)
-        this.finish()
 
     }
 

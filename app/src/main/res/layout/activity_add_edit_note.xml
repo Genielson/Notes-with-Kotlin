@@ -7,11 +7,23 @@
     tools:context=".AddNoteActivity">
 
     <!--edit text for note title-->
+
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        />
+
     <EditText
         android:id="@+id/idEdtNotaTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:layout_below="@id/imgBack"
         android:hint="Seu titulo"
         android:textColor="@color/white"
         android:textColorHint="@color/white" />

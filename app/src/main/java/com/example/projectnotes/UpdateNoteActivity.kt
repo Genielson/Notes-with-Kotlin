@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import java.text.SimpleDateFormat
@@ -15,6 +16,7 @@ class UpdateNoteActivity : AppCompatActivity() {
     private lateinit var titulo:EditText
     private lateinit var descricao:EditText
     private lateinit var botaoAtualizar:Button
+    private lateinit var botaoVoltar : ImageView
     private lateinit var viewModel: NoteViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +26,7 @@ class UpdateNoteActivity : AppCompatActivity() {
         titulo = findViewById<EditText>(R.id.idEdtNotaTituloUpdate)
         descricao = findViewById<EditText>(R.id.idEdtNotaDescricaoUpdate)
         botaoAtualizar = findViewById<Button>(R.id.idBtnAtualizar)
-
+        botaoVoltar =  findViewById(R.id.imgBackUpdate)
         viewModel = ViewModelProvider(this,ViewModelProvider.
         AndroidViewModelFactory.
         getInstance(application)).get(NoteViewModel::class.java)
@@ -35,6 +37,11 @@ class UpdateNoteActivity : AppCompatActivity() {
 
         titulo.setText(tituloRecuperado)
         descricao.setText(descricaoRecuperada)
+
+        botaoVoltar.setOnClickListener {
+            super.onBackPressed()
+        }
+
         botaoAtualizar.setOnClickListener {
 
             if(titulo.text.toString().equals("") || descricao.text.toString().equals("")){

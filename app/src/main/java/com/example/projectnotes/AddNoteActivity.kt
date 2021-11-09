@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import java.text.SimpleDateFormat
@@ -15,6 +16,7 @@ class AddNoteActivity : AppCompatActivity() {
    lateinit var tituloNota : EditText
    lateinit var descricaoNota : EditText
    lateinit var botaoSalvar : Button
+   lateinit var botaoVoltar : ImageView
    lateinit var viewModel: NoteViewModel
    var idNote = -1
 
@@ -25,9 +27,13 @@ class AddNoteActivity : AppCompatActivity() {
         tituloNota = findViewById(R.id.idEdtNotaTitulo)
         descricaoNota = findViewById(R.id.idEdtNotaDescricao)
         botaoSalvar = findViewById(R.id.idBtnSalvar)
-
+        botaoVoltar = findViewById(R.id.imgBack)
         viewModel = ViewModelProvider(this,ViewModelProvider.
         AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
+
+        botaoVoltar.setOnClickListener {
+            super.onBackPressed()
+        }
 
         botaoSalvar.setOnClickListener {
 

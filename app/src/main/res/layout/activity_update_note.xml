@@ -7,10 +7,22 @@
     tools:context=".UpdateNoteActivity">
 
     <!--edit text for note title-->
+
+    <ImageView
+        android:id="@+id/imgBackUpdate"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_arrow_back_black_24dp" />
+
     <EditText
         android:id="@+id/idEdtNotaTituloUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/imgBackUpdate"
         android:layout_margin="10dp"
         android:hint="Seu titulo"
         android:textColor="@color/white"
@@ -21,7 +33,7 @@
         android:id="@+id/idEdtNotaDescricaoUpdate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/idBtnSalvar"
+        android:layout_above="@id/idBtnAtualizar"
         android:layout_below="@id/idEdtNotaTituloUpdate"
         android:layout_margin="10dp"
         android:background="@color/black_1"
